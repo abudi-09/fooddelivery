@@ -8,7 +8,8 @@ const ExploreMenu = () => {
       <h1> Explore our Menu </h1>
       <p className="explore-menu-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-        efficitur, nunc et bibendum facilisis;
+        efficitur, nunc et bibendum facilisis , nunc nisl aliquet nunc, eget
+        tincidunt nunc nisl eget nunc. Donec euismod, nisl eget consectetur
       </p>
       <div className="explore-menu-list">
         {menu_list.map((item, index) => {
