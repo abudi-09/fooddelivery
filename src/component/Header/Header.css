@@ -34,3 +34,39 @@
   border-radius: 50px;
   font-size: max(1.5vw, 13px);
 }
+@media (max-width: 1050px) {
+  .header-contents {
+    max-width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    gap: 10px;
+  }
+  .header-contents h2 {
+    font-size: max(5vw, 22px);
+  }
+  .header-contents p {
+    font-size: max(2vw, 12px);
+  }
+  .header-contents button {
+    font-size: max(3vw, 13px);
+    padding: max(1.5vw, 10px) max(3vw, 20px);
+  }
+}
+@media (max-width: 1050px) {
+  .header-contents {
+    max-width: 45%;
+  }
+}
+@media (max-width: 750px) {
+  .header-contents {
+    max-width: 55%;
+  }
+
+  .header-contents p {
+    display: none;
+  }
+  .header-contents button {
+    padding: 2vw 4vw;
+  }
+}

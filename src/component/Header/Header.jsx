@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-contents">
-        <h2> order your favourite food here </h2>
+        <h2> Order Your Favourite Food here </h2>
         <p>
           choose A different type of header HTTP headers, a table header, or
           another UI component please specify.

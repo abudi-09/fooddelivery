@@ -1,37 +1,49 @@
 import React from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setShowlogin }) => {
   const [menu, setMenu] = React.useState("home");
   return (
     <div className="navbar">
       <img src={assets.logo} alt="" className="logo" />
       <ul className="navbar-menu">
-        <li
+        <Link
+          to="/"
           onClick={() => setMenu("home")}
           className={menu === "home" ? "active" : ""}
         >
           home
-        </li>
-        <li
+        </Link>
+        <a
+          href="#explore-menu"
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
           menu
-        </li>
-        <li
+        </a>
+        <a
+          href="#app-download"
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
           mobile-app
-        </li>
-        <li
-          onClick={() => setMenu("contact us ")}
+        </a>
+        <Link
+          to="/app-download"
+          onClick={() => {
+            setMenu("contact us");
+            setTimeout(() => {
+              const footer = document.getElementById("footer");
+              if (footer) footer.scrollIntoView({ behavior: "smooth" });
+            }, 0);
+          }}
           className={menu === "contact us" ? "active" : ""}
+          aria-current={menu === "contact us" ? "page" : undefined}
         >
-          contact us
-        </li>
+          Contact Us
+        </Link>
       </ul>
       <div className="nav-right">
         <img src={assets.search_icon} alt="" />
@@ -39,7 +51,10 @@ const Navbar = () => {
           <img src={assets.basket_icon} alt="" />
           <div className="dot"></div>
         </div>
-        <button className="navbar-button"> Signin </button>
+        <button className="navbar-button" onClick={() => setShowlogin(true)}>
+          {" "}
+          Signin{" "}
+        </button>
       </div>
     </div>
   );
