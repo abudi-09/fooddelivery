@@ -101,9 +101,10 @@
 .cart-promocode-input button {
   padding: 10px 20px;
   border: none;
-  background-color: #e2e2e2;
+  background-color: #111010;
   border-radius: 4px;
   cursor: pointer;
+  color: white;
 }
 @media (max-width: 750px) {
   .cart-bottom {
