@@ -2,42 +2,49 @@ import React, { useState } from "react";
 import "./loginpopup.css";
 import { assets } from "../../assets/assets";
 
-const loginpopup = ({ setShowlogin }) => {
-  const [currstate, setCurrstate] = useState("login");
+const LoginPopup = ({ setShowlogin }) => {
+  const [currState, setCurrState] = useState("Login");
+
   return (
     <div className="login-popup">
-      <form action="" className="login-popup-container">
+      <form className="login-popup-container">
         <div className="login-popup-title">
-          <h2>{currstate}</h2>
+          <h2>{currState}</h2>
           <img
             onClick={() => setShowlogin(false)}
             src={assets.cross_icon}
-            alt=""
+            alt="Close"
           />
         </div>
+
         <div className="login-popup-inputs">
-          {currstate === "login" ? (
-            <></>
+          {currState === "Login" ? (
+            <>
+              <input type="email" placeholder="Your Email" required />
+              <input type="password" placeholder="Your Password" required />
+            </>
           ) : (
-            <input type="text" placeholder="Your name" required />
+            <>
+              <input type="text" placeholder="Your Name" required />
+              <input type="email" placeholder="Your Email" required />
+              <input type="password" placeholder="Your Password" required />
+            </>
           )}
-          <input type="Email" placeholder="Your Email" required />
-          <input type="password" placeholder="Your password " required />
         </div>
-        <button>{currstate === "signup" ? "Create Account" : "Login"}</button>
+        <button>{currState === "SignUp" ? "Create Account" : "Login"}</button>
         <div className="login-popup-condition">
-          <input type="checkbox" />
-          <p> i agree to the term of use the privacy </p>
+          <input type="checkbox" required />
+          <p>I agree to the terms of use and privacy policy</p>
         </div>
-        {currstate === "login" ? (
+        {currState === "Login" ? (
           <p>
-            create a new account{" "}
-            <span onClick={() => setCurrstate("Signup")}>Click here </span>
+            Create a new account?{" "}
+            <span onClick={() => setCurrState("SignUp")}>Click here</span>
           </p>
         ) : (
           <p>
-            Already I have an account{" "}
-            <span onClick={() => setCurrstate("Login")}>Login here</span>
+            Already have an account?{" "}
+            <span onClick={() => setCurrState("Login")}>Login here</span>
           </p>
         )}
       </form>
@@ -45,4 +52,4 @@ const loginpopup = ({ setShowlogin }) => {
   );
 };
 
-export default loginpopup;
+export default LoginPopup;

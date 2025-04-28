@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, useMemo } from "react";
+import { createContext, useState, useMemo, useEffect } from "react";
 import { food_list, menu_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
@@ -7,22 +7,43 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [category, setCategory] = useState("All");
 
-  const addToCart = useCallback((itemId) => {
-    setCartItems((prev) => ({
-      ...prev,
-      [itemId]: (prev[itemId] || 0) + 1,
-    }));
-  }, []);
+  console.log("StoreContext - food_list:", food_list);
+  console.log("StoreContext - cartItems:", cartItems);
 
-  const removeFromCart = useCallback((itemId) => {
+  useEffect(() => {
+    console.log("StoreContext - cartItems changed:", cartItems);
+  }, [cartItems]);
+
+  const addToCart = (itemId) => {
+    console.log("StoreContext - addToCart called with itemId:", itemId);
+    console.log("StoreContext - cartItems before:", cartItems);
+    setCartItems((prev) => {
+      const newCartItems = {
+        ...prev,
+        [itemId]: (prev[itemId] || 0) + 1,
+      };
+      console.log("StoreContext - cartItems after:", newCartItems);
+      return newCartItems;
+    });
+  };
+
+  const removeFromCart = (itemId) => {
+    console.log("StoreContext - removeFromCart called with itemId:", itemId);
+    console.log("StoreContext - cartItems before:", cartItems);
     setCartItems((prev) => {
       if (prev[itemId] <= 1) {
         const { [itemId]: _, ...rest } = prev;
+        console.log("StoreContext - cartItems after (removed):", rest);
         return rest;
       }
-      return { ...prev, [itemId]: prev[itemId] - 1 };
+      const newCartItems = { ...prev, [itemId]: prev[itemId] - 1 };
+      console.log(
+        "StoreContext - cartItems after (decremented):",
+        newCartItems
+      );
+      return newCartItems;
     });
-  }, []);
+  };
 
   const contextValue = useMemo(
     () => ({
@@ -34,7 +55,7 @@ const StoreContextProvider = (props) => {
       addToCart,
       removeFromCart,
     }),
-    [food_list, menu_list, category, cartItems, addToCart, removeFromCart]
+    [food_list, menu_list, category, cartItems]
   );
 
   return (

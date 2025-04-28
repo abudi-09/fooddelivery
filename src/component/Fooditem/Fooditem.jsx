@@ -1,32 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./Fooditem.css";
 import { assets } from "../../assets/assets";
+import { StoreContext } from "../../Context/StoreContext"; // Update the path to match index.jsx
 
 const Fooditem = ({ id, name, description, price, image }) => {
-  const [itemcount, setItemcount] = useState(0);
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+
+  const quantity = cartItems[id] || 0;
+
+  console.log("Fooditem - Rendering:", { id, name, quantity });
+  console.log("Fooditem - cartItems:", cartItems);
+
   return (
     <div className="food-item">
       <div className="food-item-img-container">
         <img className="food-item-img" src={image} alt={`Image of ${name}`} />
-        {!itemcount ? (
+        {quantity === 0 ? (
           <img
             className="add"
-            onClick={() => setItemcount((prev) => prev + 1)}
+            onClick={() => {
+              console.log("Fooditem - Adding to cart:", { id, name });
+              addToCart(id);
+            }}
             src={assets.add_icon_white}
-            alt=""
+            alt="Add to cart"
           />
         ) : (
           <div className="food-item-counter">
             <img
-              onClick={() => setItemcount((prev) => prev - 1)}
+              onClick={() => {
+                console.log("Fooditem - Removing from cart:", { id, name });
+                removeFromCart(id);
+              }}
               src={assets.remove_icon_red}
-              alt=""
+              alt="Remove from cart"
             />
-            <p>{itemcount}</p>
+            <p>{quantity}</p>
             <img
-              onClick={() => setItemcount((prev) => prev + 1)}
+              onClick={() => {
+                console.log("Fooditem - Adding more to cart:", { id, name });
+                addToCart(id);
+              }}
               src={assets.add_icon_green}
-              alt=""
+              alt="Add more to cart"
             />
           </div>
         )}
@@ -34,7 +50,7 @@ const Fooditem = ({ id, name, description, price, image }) => {
       <div className="food-item-info">
         <div className="food-item-img-rating">
           <p>{name}</p>
-          <img src={assets.rating_starts} alt="" />
+          <img src={assets.rating_starts} alt="Rating stars" />
         </div>
         <p className="food-item-desc">{description}</p>
         <p className="food-item-price">${price}</p>
