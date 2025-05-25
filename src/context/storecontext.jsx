@@ -4,7 +4,7 @@ import { food_list, menu_list } from "../assets/assets";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState({}); 
   const [category, setCategory] = useState("All");
 
   console.log("StoreContext - food_list:", food_list);
